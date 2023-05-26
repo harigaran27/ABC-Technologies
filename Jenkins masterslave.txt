@@ -1,0 +1,47 @@
+Jenkins Setup 
+
+yum update -y
+amazon-linux-extras install epel
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+yum install fontconfig java-11-openjdk
+sudo amazon-linux-extras install java-openjdk11
+yum install jenkins
+systemctl status jenkins
+systemctl start jenkins
+systemctl status jenkins
+systemctl enable jenkins
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+----------------------------------------------------------
+
+Node 1
+
+yum update -y
+amazon-linux-extras install epel
+amazon-linux-extras install java-openjdk11
+yum install git
+sudo tar xf apache-maven-3.9.2-bin.tar.gz -C /opt
+sudo ln -s /opt/apache-maven-3.9.2 /opt/maven
+vi .bashrc
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64"
+export MAVEN_HOME=/opt/apache-maven-3.9.2
+export M2=/opt/apache-maven-3.9.2/bin
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$MAVEN_HOME:$M2
+source ~/.bash_profile
+vi .bash_profile
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-11.0.13.0.8-1.amzn2.0.3.x86_64"
+export MAVEN_HOME=/opt/apache-maven-3.9.2
+export M2=/opt/apache-maven-3.9.2/bin
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$MAVEN_HOME:$M2
+source ~/.bash_profile
+useradd -m -d /home/jenkins jenkin
+su - jenkin
+ssh-keygen
+ls ~/.ssh 
+cd /home/jenkins/.ssh
+cat id_rsa.pub > authorized_keys
+chown -R jenkin /home/jenkins/.ssh
+chmod 600 /home/jenkins/.ssh/authorized_keys
+chmod 700 /home/jenkins/.ssh
+
