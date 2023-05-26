@@ -1,0 +1,23 @@
+Kubectl
+
+#Installing kubectl on Ansible controller server.
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+chmod +x ./kubectl
+
+sudo mv ./kubectl /usr/local/bin/kubectl
+sudo mv /usr/local/bin/kubectl /usr/bin/kubectl
+kubectl version --client
+**************************************************************
+# Copy config file from Kubernetes cluster Master server from the below path and paste it in Ansible Controller server.
+~/.kube/config
+********************************************************************
+vi ~/.bashrc
+export KUBECONFIG=/home/devopsadmin/kubernates/config
+source ~/.bashrc
+
+ansible-galaxy collection install community.kubernetes
+
+
+

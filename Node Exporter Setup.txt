@@ -1,0 +1,19 @@
+Node Exporter
+
+#Download the latest Node Exporter version:
+wget https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz
+
+#Extract the downloaded file:
+tar xvfz node_exporter-*.tar.gz
+
+#Move Node Exporter to your desired location:
+sudo mv node_exporter-1.2.2.linux-amd64 node_exporter
+
+#Move to the Node Exporter directory:
+cd node_exporter
+
+#Start Node Exporter with the following command
+nohup ./node_exporter &
+
+#######################################################################################
+Node Exporter should now be running and exposing metrics on port 9100

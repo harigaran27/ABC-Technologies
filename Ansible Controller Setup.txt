@@ -1,0 +1,36 @@
+Ansible Controller Setup
+
+yum update -y
+yum install ansible
+amazon-linux-extras install epel
+amazon-linux-extras install ansible2
+amazon-linux-extras install java-openjdk11
+ansible --version
+useradd -m -d /home/devopsadmin devopsadmin
+su devopsadmin
+chown -R devopsadmin:devopsadmin /etc/ansible
+su devopsadmin
+mkdir ansiblenodekeys
+cd ansiblenodekeys/
+cd /etc/ansible/
+vi hosts
+added this line
+***************************
+node1 ansible_ssh_host=172.31.40.237 ansible_ssh_user=ansibleadmin ansible_ssh_private_key_file=/etc/ansible/ansiblenodekeys/ansiblenode1.key
+*************************************
+mkdir playbooks
+
+Installed Kubectl
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+kubectl version --client
+
+sudo mv /usr/local/bin/kubectl /usr/bin/kubectl
+vi ~/.bashrc
+export PATH=$PATH:/usr/local/bin
+source ~/.bashrc
+
+
+

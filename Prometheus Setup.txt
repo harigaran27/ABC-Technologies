@@ -1,0 +1,41 @@
+Prometheus Setup:
+
+In AWS linux2 instance: 
+
+# Download the latest Prometheus version:
+wget https://github.com/prometheus/prometheus/releases/download/v2.30.0/prometheus-2.30.0.linux-amd64.tar.gz
+
+#Extract the downloaded file:
+tar xvfz prometheus-*.tar.gz
+
+#Move Prometheus to your desired location:
+sudo mv prometheus-2.30.0.linux-amd64 prometheus
+
+#Move to the Prometheus directory:
+cd prometheus
+
+#Edit the Prometheus configuration file (prometheus.yml) and add your localhost as a target. Prometheus will monitor this target:
+
+sudo vi prometheus.yml
+*********************************************************************
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+    - targets: ['localhost:9090']
+
+  - job_name: 'node'
+    static_configs:
+    - targets: ['localhost:9100']
+************************************************************************
+# Save and close the file.
+# Start Prometheus with the following command:
+nohup ./prometheus & 
+
+################################################################
+Prometheus web interface by navigating to http://your_server_ip:9090 in your web browser. 
+
+

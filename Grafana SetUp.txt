@@ -1,0 +1,29 @@
+Grafana SetUp
+
+#Add Grafana repository:
+
+sudo tee /etc/yum.repos.d/grafana.repo<<EOF
+[grafana]
+name=grafana
+baseurl=https://packages.grafana.com/oss/rpm
+repo_gpgcheck=1
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.grafana.com/gpg.key
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+EOF
+
+# Install Grafana with yum
+sudo yum install grafana
+
+#Start the Grafana service:
+sudo systemctl start grafana-server
+
+#Enable Grafana to start at boot:
+sudo systemctl enable grafana-server
+
+#################################################################################################
+#Open Grafana in your browser by navigating to: http://your_aws_instance_ip:3000
+
+#Login with the default credentials (user: admin, password: admin)
